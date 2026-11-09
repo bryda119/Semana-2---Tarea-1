@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Clientes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ClienteCrud.Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <div class="app-nav">
+                <a class="brand" asp-controller="Clientes" asp-action="Index">
+                    <span class="brand-mark" aria-hidden="true">
+                        <i data-lucide="users"></i>
+                    </span>
+                    <span>Clientes</span>
+                </a>
+
+                <button type="button" class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li>
+                        <a asp-controller="Clientes" asp-action="Index" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : null)">
+                            <i data-lucide="users"></i>
+                            Listado
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Clientes" asp-action="Create" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Create" ? "active" : null)">
+                            <i data-lucide="user-plus"></i>
+                            Agregar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            &copy; @DateTime.Now.Year · Gestión de clientes
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

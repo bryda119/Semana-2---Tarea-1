@@ -1,0 +1,108 @@
+@model ClienteCrud.Domain.Entities.Cliente
+
+@{
+    ViewData["Title"] = "Editar cliente";
+}
+
+<a asp-action="Index" class="back-link">
+    <i data-lucide="arrow-left"></i>
+    Regresar
+</a>
+
+<div class="page-header">
+    <div class="page-header-copy">
+        <h1>
+            <i data-lucide="pencil"></i>
+            Editar cliente
+        </h1>
+        <p>Actualiza la información del cliente seleccionado.</p>
+    </div>
+</div>
+
+<div class="ui-card form-card">
+    <div class="ui-card-body">
+        <form asp-action="Edit" method="post" data-loading="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="FechaRegistro" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-group">
+                        <label asp-for="Nombre" class="field-label"></label>
+                        <div class="input-with-icon">
+                            <i data-lucide="user"></i>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ej. Ana" />
+                        </div>
+                        <span asp-validation-for="Nombre" class="field-error"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-group">
+                        <label asp-for="Apellido" class="field-label"></label>
+                        <div class="input-with-icon">
+                            <i data-lucide="user-round"></i>
+                            <input asp-for="Apellido" class="form-control" placeholder="Ej. Gómez" />
+                        </div>
+                        <span asp-validation-for="Apellido" class="field-error"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-group">
+                        <label asp-for="Email" class="field-label"></label>
+                        <div class="input-with-icon">
+                            <i data-lucide="mail"></i>
+                            <input asp-for="Email" class="form-control" placeholder="ejemplo@correo.com" />
+                        </div>
+                        <span asp-validation-for="Email" class="field-error"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-group">
+                        <label asp-for="Telefono" class="field-label"></label>
+                        <div class="input-with-icon">
+                            <i data-lucide="phone"></i>
+                            <input asp-for="Telefono" class="form-control" placeholder="Ej. 5551234567" />
+                        </div>
+                        <span asp-validation-for="Telefono" class="field-error"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label asp-for="Direccion" class="field-label"></label>
+                <div class="input-with-icon">
+                    <i data-lucide="map-pin"></i>
+                    <input asp-for="Direccion" class="form-control" placeholder="Calle, número, ciudad" />
+                </div>
+                <span asp-validation-for="Direccion" class="field-error"></span>
+            </div>
+
+            <div class="field-group">
+                <label asp-for="FechaRegistro" class="field-label"></label>
+                <div class="input-with-icon">
+                    <i data-lucide="info"></i>
+                    <input asp-for="FechaRegistro" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a asp-action="Index" class="btn-ui btn-secondary-ui">
+                    <i data-lucide="x"></i>
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-ui btn-primary-ui">
+                    <span class="btn-icon-slot"><i data-lucide="save"></i></span>
+                    <span class="btn-label">Guardar cambios</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

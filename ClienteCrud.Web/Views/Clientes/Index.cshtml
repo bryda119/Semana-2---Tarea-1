@@ -1,0 +1,116 @@
+@model IEnumerable<ClienteCrud.Domain.Entities.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+    var hayClientes = Model.Any();
+}
+
+<div class="page-header">
+    <div class="page-header-copy">
+        <h1>
+            <i data-lucide="users"></i>
+            Clientes
+        </h1>
+        <p>Administra y consulta los clientes registrados.</p>
+    </div>
+    <a asp-action="Create" class="btn-ui btn-primary-ui">
+        <i data-lucide="user-plus"></i>
+        Agregar cliente
+    </a>
+</div>
+
+@if (TempData["Mensaje"] is string mensaje)
+{
+    <div class="alert-ui alert-success-ui alert alert-dismissible fade show" role="alert">
+        <i data-lucide="info"></i>
+        <div>@mensaje</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+}
+
+<div class="ui-card table-shell">
+    <div class="ui-card-body">
+        @if (hayClientes)
+        {
+            <div class="toolbar">
+                <div class="search-field">
+                    <i data-lucide="search"></i>
+                    <input type="search"
+                           id="clientSearch"
+                           placeholder="Buscar clientes..."
+                           autocomplete="off"
+                           aria-label="Buscar clientes" />
+                </div>
+            </div>
+        }
+
+        @if (!hayClientes)
+        {
+            <div class="empty-state">
+                <i data-lucide="users"></i>
+                <h3>No hay clientes registrados</h3>
+                <p>Agrega el primero para comenzar a gestionar tu directorio.</p>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive-ui">
+                <table class="clients-table" id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                            <th>@Html.DisplayNameFor(model => model.Apellido)</th>
+                            <th>@Html.DisplayNameFor(model => model.Email)</th>
+                            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+                            <th>@Html.DisplayNameFor(model => model.Direccion)</th>
+                            <th>@Html.DisplayNameFor(model => model.FechaRegistro)</th>
+                            <th class="col-actions">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var searchText = $"{item.Nombre} {item.Apellido} {item.Email} {item.Telefono} {item.Direccion}";
+                        <tr data-search="@searchText">
+                            <td>@item.Nombre</td>
+                            <td>@item.Apellido</td>
+                            <td>@item.Email</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.Direccion</td>
+                            <td>@item.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="col-actions">
+                                <div class="actions-row">
+                                    <a asp-action="Details" asp-route-id="@item.Id"
+                                       class="btn-icon view"
+                                       data-bs-toggle="tooltip"
+                                       title="Visualizar">
+                                        <i data-lucide="eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id"
+                                       class="btn-icon edit"
+                                       data-bs-toggle="tooltip"
+                                       title="Editar">
+                                        <i data-lucide="pencil"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"
+                                       class="btn-icon delete"
+                                       data-bs-toggle="tooltip"
+                                       title="Eliminar">
+                                        <i data-lucide="trash-2"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="emptyFilterState" class="empty-state is-hidden" hidden>
+                <i data-lucide="search"></i>
+                <h3>Sin resultados</h3>
+                <p>No se encontraron clientes con ese criterio.</p>
+            </div>
+        }
+    </div>
+</div>

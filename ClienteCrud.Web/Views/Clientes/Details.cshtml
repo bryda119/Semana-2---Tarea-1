@@ -1,0 +1,62 @@
+@model ClienteCrud.Domain.Entities.Cliente
+
+@{
+    ViewData["Title"] = "Detalle del cliente";
+}
+
+<a asp-action="Index" class="back-link">
+    <i data-lucide="arrow-left"></i>
+    Regresar
+</a>
+
+<div class="page-header">
+    <div class="page-header-copy">
+        <h1>
+            <i data-lucide="eye"></i>
+            Detalle del cliente
+        </h1>
+        <p>Consulta la información registrada de este cliente.</p>
+    </div>
+</div>
+
+<div class="ui-card form-card">
+    <div class="ui-card-body">
+        <div class="detail-grid">
+            <div class="detail-item">
+                <div class="label"><i data-lucide="user"></i> @Html.DisplayNameFor(model => model.Nombre)</div>
+                <div class="value">@Model.Nombre</div>
+            </div>
+            <div class="detail-item">
+                <div class="label"><i data-lucide="user-round"></i> @Html.DisplayNameFor(model => model.Apellido)</div>
+                <div class="value">@Model.Apellido</div>
+            </div>
+            <div class="detail-item">
+                <div class="label"><i data-lucide="mail"></i> @Html.DisplayNameFor(model => model.Email)</div>
+                <div class="value">@Model.Email</div>
+            </div>
+            <div class="detail-item">
+                <div class="label"><i data-lucide="phone"></i> @Html.DisplayNameFor(model => model.Telefono)</div>
+                <div class="value">@Model.Telefono</div>
+            </div>
+            <div class="detail-item full">
+                <div class="label"><i data-lucide="map-pin"></i> @Html.DisplayNameFor(model => model.Direccion)</div>
+                <div class="value">@Model.Direccion</div>
+            </div>
+            <div class="detail-item full">
+                <div class="label"><i data-lucide="info"></i> @Html.DisplayNameFor(model => model.FechaRegistro)</div>
+                <div class="value">@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Index" class="btn-ui btn-secondary-ui">
+                <i data-lucide="arrow-left"></i>
+                Volver
+            </a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-ui btn-primary-ui">
+                <i data-lucide="pencil"></i>
+                Editar
+            </a>
+        </div>
+    </div>
+</div>

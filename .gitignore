@@ -1,0 +1,31 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.DotSettings.user
+
+## Build / publish
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+publish/
+*.dll
+*.exe
+*.pdb
+!ClienteCrud.Web/wwwroot/**
+
+## Secrets / local
+appsettings.Development.json
+*.env
+.env
+
+## OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
